@@ -1,0 +1,170 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Montserrat, sans-serif;
+  background-color: #ffffff;
+  color: #2e2f42;
+}
+
+
+.form {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 36px;
+  margin-bottom: 32px;
+  height: 40px;
+}
+
+
+.form-input {
+  width: 272px;
+  padding: 8px 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  outline: none;
+}
+
+input:hover {
+  border-color: #000000;
+}
+
+input:focus {
+  border-color: #4e75ff;
+}
+
+
+.form-input::placeholder {
+  color: #a0aec0;
+}
+
+
+.form-btn {
+  width: 91px;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #ffffff;
+  background-color: #4e75ff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus {
+  background-color: #6c8cff;
+}
+
+.gallery {
+  max-width: 1128px;
+  margin: 0 auto 30px;
+  display: flex;
+  flex: 0 0 calc((100% - 48px) / 3);
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px;
+  list-style: none;
+
+}
+
+.gallery-link {
+  width: 360px;
+  height: 200px;
+  background-color: #ffffff;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+
+.gallery-image {
+  display: block;
+  width: 100%;
+  height: 153px;
+  overflow: hidden;
+}
+
+.gallery-img-item {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.gallery-info {
+  background-color: #ffffff;
+  display: flex;
+  padding: 4px 25px 4px 20px;
+  justify-content: space-between;
+
+}
+
+.gallery-info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: fit-content;
+  flex: none;
+}
+
+
+.title-item {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.33;
+  color: #2e2f42;
+}
+
+.qty-item {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #2e2f42;
+}
+
+.modal {
+  width: 1112px;
+  padding: 28px 164px;
+  background-color: white;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.modal img {
+  max-width: 1112px;
+  height: 640px;
+  margin-bottom: 10px;
+}
+
+.load-btn {
+  width: 305px;
+  height: 70px;
+  padding: 8px 16px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #ffffff;
+  background-color: #4e75ff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  display: block;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.hidden-btn {
+  display: none;
+}
