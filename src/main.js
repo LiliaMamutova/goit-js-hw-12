@@ -40,9 +40,15 @@ async function onSearch(event) {
 
   try {
     const data = await getImagesByQuery(searchQuery, page);
+
+    if (data.hits.length === 0) {
+      showErrorMessage('Sorry, there are no images matching your search query. Please try again!', 'red');
+      hideLoadMoreButton();
+      return;
+    }
+
     reachedLimit = page * limit >= data.totalHits;
 
-    hideLoadMoreButton();
 
     if(reachedLimit) {
       hideLoadMoreButton();
@@ -51,12 +57,7 @@ async function onSearch(event) {
       showLoadMoreButton();
     }
 
-    if (data.hits.length > 0) {
-      createGallery(data.hits);
-    } else {
-      showErrorMessage('Something bad happened, try again', 'red');
-    }
-
+    createGallery(data.hits);
 
   } catch (error) {
     showErrorMessage('Sorry, there are no images matching your search query. Please try again!', 'red');
