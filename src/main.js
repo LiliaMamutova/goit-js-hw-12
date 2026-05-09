@@ -26,6 +26,7 @@ async function onSearch(event) {
 
   const input = event.currentTarget.elements[0];
   searchQuery = input.value.trim();
+  page = 1;
 
 
   if (!searchQuery) {
@@ -33,16 +34,19 @@ async function onSearch(event) {
     return;
   }
 
+  hideLoadMoreButton();
   showLoader();
   clearGallery();
 
   try {
     const data = await getImagesByQuery(searchQuery, page);
-    console.log(data);
     reachedLimit = page * limit >= data.totalHits;
+
+    hideLoadMoreButton();
 
     if(reachedLimit) {
       hideLoadMoreButton();
+      showErrorMessage("We're sorry, but you've reached the end of search results", "yellow");
     } else {
       showLoadMoreButton();
     }
@@ -56,7 +60,6 @@ async function onSearch(event) {
 
   } catch (error) {
     showErrorMessage('Sorry, there are no images matching your search query. Please try again!', 'red');
-    console.log(error.message);
 
   } finally {
     hideLoader();
@@ -66,27 +69,25 @@ async function onSearch(event) {
 
 async function onLoadMore(event) {
   event.preventDefault();
-
   page += 1;
-  console.log(page);
+
   loadMoreBtn.disabled = true;
+  hideLoadMoreButton();
+  showLoader();
 
   try {
     if (reachedLimit) {
-      hideLoadMoreButton();
-      showErrorMessage("We're sorry, but you've reached the end of search results", "yellow");
       return;
     }
     const data = await getImagesByQuery(searchQuery, page);
     reachedLimit = page * limit >= data.totalHits;
 
     if(reachedLimit) {
-      hideLoadMoreButton();
+      showErrorMessage("We're sorry, but you've reached the end of search results", "yellow");
     } else {
       showLoadMoreButton();
     }
 
-    console.log(data);
     createGallery(data.hits);
 
     const card = document.querySelector(".gallery-link");
@@ -98,9 +99,9 @@ async function onLoadMore(event) {
       behavior: "smooth"
     })
   } catch (error) {
-    console.log(error);
     showErrorMessage("Something bad happened, try again", "red");
   } finally {
+    hideLoader();
     loadMoreBtn.disabled = false;
   }
 }
