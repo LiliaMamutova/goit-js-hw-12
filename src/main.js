@@ -70,6 +70,11 @@ async function onSearch(event) {
 
 async function onLoadMore(event) {
   event.preventDefault();
+
+  if (reachedLimit) {
+    return;
+  }
+
   page += 1;
 
   loadMoreBtn.disabled = true;
@@ -77,13 +82,11 @@ async function onLoadMore(event) {
   showLoader();
 
   try {
-    if (reachedLimit) {
-      return;
-    }
     const data = await getImagesByQuery(searchQuery, page);
     reachedLimit = page * limit >= data.totalHits;
 
     if(reachedLimit) {
+      hideLoadMoreButton();
       showErrorMessage("We're sorry, but you've reached the end of search results", "yellow");
     } else {
       showLoadMoreButton();
